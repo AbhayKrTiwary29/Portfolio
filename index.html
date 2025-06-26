@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+ body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(ellipse at top left, #0f0c29, #302b63, #24243e);
+  color: #ffffff;
+}
+
+header {
+  background: rgba(15, 12, 41, 0.9);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  padding: 2rem;
+  text-align: center;
+}
+
+#profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00ffff;
+  box-shadow: 0 0 12px #00ffff;
+}
+
+.upload-label {
+  display: inline-block;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background-color: #00ffff;
+  color: #0f0c29;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-shadow: 0 0 5px #fff;
+}
+
+main {
+  padding: 2rem;
+  background: rgba(10, 10, 30, 0.85);
+  margin: 2rem auto;
+  max-width: 900px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #00ffff;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+section h2 {
+  border-bottom: 2px solid #00ffff;
+  padding-bottom: 0.5rem;
+  color: #00ffff;
+  text-shadow: 0 0 8px #00ffff;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin: 0.5rem 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+ul li::before {
+  content: "➤";
+  position: absolute;
+  left: 0;
+  color: #39ff14;
+}
+
+a {
+  color: #39ff14;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #ff00ff;
+  text-shadow: 0 0 5px #ff00ff;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #1f1b3a;
+  color: #00ffff;
+  border-top: 2px solid #39ff14;
+  text-shadow: 0 0 4px #00ffff;
+}
+
+.stickers {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1rem 0 2rem;
+}
+
+.sticker {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  background-color: #1c1c3c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px #00ffff;
+  padding: 10px;
+}
+
+.sticker img {
+  max-width: 100%;
+  height: auto;
+}
+
+.social-buttons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social-buttons img {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(0 0 5px #00ffff);
+  transition: transform 0.2s ease;
+}
+
+.social-buttons img:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 10px #ff00ff);
+}
+.navbar {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 1000;
+}
+
+.menu-toggle {
+  font-size: 28px;
+  cursor: pointer;
+  color: #0d47a1;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  display: none;
+  background: #ffffffdd;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.menu li {
+  padding: 8px 12px;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: #1976d2;
+  font-weight: bold;
+}
+
+.menu li a:hover {
+  text-decoration: underline;
+}
+.nav-menu {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1000;
+}
+
+.menu-icon {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+#menu-list {
+  display: none;
+  list-style: none;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  margin-top: 10px;
+}
+
+#menu-list li {
+  margin: 8px 0;
+}
+
+#menu-list li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+    
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+  <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+  <ul class="menu" id="menu">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+  <header>
+    <ul class="menu">
+  <li><a href="#about">About</a></li>
+  <li><a href="#education">Education</a></li>
+  <li><a href="#experience">Experience</a></li>
+  <li><a href="#projects">Projects</a></li>
+  <li><a href="#contact">Contact</a></li>
+</ul>
+    <div class="container">
+      <div class="profile">
+        <img id="profile-photo" src="image.PNG" alt="Profile Photo">
+        <h1>Abhay Kumar Tiwary</h1>
+        <p>artificial-Intelligence & Machine Learning Engineer | Python Developer|</p>
+      </div>
+    </div>
+  </header>
+  <div class="stickers">
+    <div class="sticker"><img src="https://img.icons8.com/color/96/python.png" alt="AI" title="Artificial Intelligence"></div>
+    <div class="sticker"><img src="https://img.icons8.com/color/96/artificial-intelligence.png" alt="Machine Learning" title="Machine Learning"></div>
+    <div class="sticker"><img src="https://img.icons8.com/color/96/html-5--v1.png" alt="Deep Learning" title="Deep Learning"></div>
+    <div class="sticker"><img src="https://img.icons8.com/fluent/96/visual-studio-code-2019.png" alt="Data Science" title="Data Science"></div>
+  </div>
+<!-- Hamburger Menu -->
+<nav class="nav-menu">
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  <ul id="menu-list">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+  <main>
+    <section id="about">
+    <section class="about">
+      <h2>About Me</h2>
+      <p>Passionate Python developer and machine learning enthusiast with a strong foundation in Python coding, Machine Learning, creative problem-solving And SAP MM Expert .</p>
+    </section>
+    <section id="education">
+    <section class="education">
+      <h2>Education</h2>
+      <ul>
+        <li><strong>Bachelors in Computer Science (BCA)</strong> - Arka Jain University (2023 - 2026)</li>
+        <li><strong>Intermediate</strong> - Sikhsha Niketan (2021 - 2023)</li>
+        <li><strong>Primary</strong> - P.S.S.V.M ( 2021 )</li>
+      </ul>
+    </section>
+    <section id="experience">
+    <section class="experience">
+      <h2>Experience</h2>
+      <ul>
+        <li><strong>Intern - Machine Learning</strong> at CodeAlpha (June 2025 - Sept 2025 )</li>
+        <li><strong>Intern - Python Programing</strong> at CodeAlpha (June 2025 - Sept 2025 )</li>
+        <li><strong>SAP MM Operator</strong> - Working As SAP MM Operator In Tata Steel Limited As A team lead ( 2024 - Till Now )</li>
+      </ul>
+    </section>
+    <section id="projects">
+    <section class="projects">
+      <h2>Projects</h2>
+      <ul>
+        <li><strong>Portfolio Website</strong> - Responsive site built Using HTML, CSS, JavaScript.</li>
+        <li><strong>Calculator</strong> - Little Calculator using Python.</li>
+        <li><strong>Task Manager App</strong> - A to-do app with local storage support.</li>
+        <li><strong>Billing Management System</strong> - A Small Billing Software for Small Shops using Python.</li>
+        <li><strong>Speech Emotion Recognition</strong> - ML model recognizing human emotions from their voice using Python, Jupiter Lab.</li>
+        <li><strong>Employee Database Management System</strong> - A Database System Using Python, SQL, Pycharm.</li>
+        
+      </ul>
+    </section>
+    <section id="contact">
+    <section class="contact">
+      <h2>Contact Me</h2>
+      <p>Email: <a href="mailto:tiwary.abhay456@gmail.com">tiwary.abhay456@gmail.com</a></p>
+      <p>Phone: +91-9798870040</p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/abhaykrtiwary" target="_blank">linkedin.com/in/abhaytiwary</a></p>
+      <p>GitHub: <a href="#">github.com/abhaytiwary</a></p>
+      <div class="social-buttons">
+  <a href="https://www.linkedin.com/in/abhaykrtiwary" target="_blank">
+    <img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn">
+  </a>
+  <a href="https://github.com/abhaytiwary" target="_blank">
+    <img src="https://img.icons8.com/ios-glyphs/48/github.png" alt="GitHub">
+  </a>
+  <a href="https://twitter.com/yourusername" target="_blank">
+    <img src="https://img.icons8.com/color/48/twitter--v1.png" alt="Twitter">
+  </a>
+  <a href="https://instagram.com/abhay_tiwary29" target="_blank">
+    <img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram">
+  </a>
+</div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; Official Portfolio of MR. Abhay Kr Tiwary . Thank You for Visiting Here.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+  function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("menu-list");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+</body>
+</html>
