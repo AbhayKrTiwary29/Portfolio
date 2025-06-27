@@ -34,7 +34,7 @@ header {
   margin: 1rem 0;
   padding: 0.5rem 1rem;
   background-color: #00ffff;
-  color: #0f0c29;
+  color: #d9d6f1;
   border-radius: 20px;
   cursor: pointer;
   font-size: 0.9rem;
@@ -214,12 +214,109 @@ footer {
 html {
   scroll-behavior: smooth;
 }
+.voice-wrapper {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.voice-prompt {
+  background-color:rgba(15, 12, 41, 0.9);
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.voice-prompt:hover {
+  background: #09bdef;
+}
+
+/* Hidden by default */
+.voice-controls {
+  display: none;
+  margin-top: 8px;
+  padding: 10px 15px;
+  background: rgba(15, 12, 41, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  gap: 10px;
+  align-items: center;
+  flex-direction: row;
+}
+
+/* Voice animation */
+.voice-animation {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 20px;
+  width: 20px;
+}
+
+.bar {
+  width: 3px;
+  height: 5px;
+  background: #4CAF50;
+  animation: bounce 1s infinite ease-in-out;
+}
+
+.bar:nth-child(2) { animation-delay: 0.2s; }
+.bar:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 100% { height: 5px; }
+  50% { height: 15px; }
+}
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  object-fit: cover;
+  opacity: 0.3; /* adjust for visibility of content */
+  pointer-events: none; /* ensures no interaction */
+}
 
 
     
   </style>
 </head>
 <body>
+  <!-- Voice Section -->
+<div class="voice-wrapper">
+  <!-- Prompt Text -->
+  <div class="voice-prompt" id="voice-prompt">🔊 Want to Listen this Portfolio ? </div>
+
+  <!-- Controls Panel -->
+  <div class="voice-controls" id="voice-controls">
+    <select id="language-select">
+      <option value="en">English</option>
+      <option value="hi">Hindi</option>
+    </select>
+
+    <button id="play-btn">▶️ Play</button>
+    <button id="pause-btn">⏸ Pause</button>
+
+    <div class="voice-animation" id="voice-animation">
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    </div>
+
+    <!-- Audio -->
+    <audio id="audio-en" src="explanation-eng.mp3.mp3"></audio>
+    <audio id="audio-hi" src="explanation-hin.mp3.mp3"></audio>
+  </div>
+</div>
+
     <nav class="navbar">
   <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
   <ul class="menu" id="menu">
@@ -243,7 +340,8 @@ html {
       <div class="profile">
         <img id="profile-photo" src="image.PNG" alt="Profile Photo">
         <h1>Abhay Kumar Tiwary</h1>
-        <p>Artificial-Intelligence & Machine Learning Engineer | Python Developer</p>
+        <p>Artificial-Intelligence & Machine Learning Engineer</p>
+        <p>Python Developer</p>
       </div>
     </div>
   </header>
@@ -313,10 +411,10 @@ html {
   <a href="https://www.linkedin.com/in/abhaykrtiwary" target="_blank">
     <img src="https://img.icons8.com/color/48/linkedin.png" alt="LinkedIn">
   </a>
-  <a href="https://github.com/AbhayKrTiwary29" target="_blank">
+  <a href="https://github.com/abhaytiwary" target="_blank">
     <img src="https://img.icons8.com/ios-glyphs/48/github.png" alt="GitHub">
   </a>
-  <a href="https://twitter.com/@ABHAYTI86989493" target="_blank">
+  <a href="https://twitter.com/yourusername" target="_blank">
     <img src="https://img.icons8.com/color/48/twitter--v1.png" alt="Twitter">
   </a>
   <a href="https://instagram.com/abhay_tiwary29" target="_blank">
@@ -342,6 +440,55 @@ html {
     const menu = document.getElementById("menu-list");
     menu.style.display = menu.style.display === "block" ? "none" : "block";
   }
+</script>
+<script>
+  const playBtn = document.getElementById("play-btn");
+  const pauseBtn = document.getElementById("pause-btn");
+  const langSelect = document.getElementById("language-select");
+  const animation = document.getElementById("voice-animation");
+  const prompt = document.getElementById("voice-prompt");
+  const controls = document.getElementById("voice-controls");
+
+  const audioEn = document.getElementById("audio-en");
+  const audioHi = document.getElementById("audio-hi");
+
+  function getCurrentAudio() {
+    return langSelect.value === "hi" ? audioHi : audioEn;
+  }
+
+  function playAudio() {
+    const currentAudio = getCurrentAudio();
+    const otherAudio = currentAudio === audioEn ? audioHi : audioEn;
+
+    otherAudio.pause();
+    otherAudio.currentTime = 0;
+
+    currentAudio.play();
+    animation.style.display = "flex";
+  }
+
+  function pauseAudio() {
+    const currentAudio = getCurrentAudio();
+    currentAudio.pause();
+    animation.style.display = "none";
+  }
+
+  // Toggle controls on click
+  prompt.addEventListener("click", () => {
+    controls.style.display = controls.style.display === "flex" ? "none" : "flex";
+  });
+
+  playBtn.addEventListener("click", playAudio);
+  pauseBtn.addEventListener("click", pauseAudio);
+
+  audioEn.onended = audioHi.onended = () => {
+    animation.style.display = "none";
+  };
+  audioEn.onended = audioHi.onended = () => {
+  animation.style.display = "none";
+  controls.style.display = "none"; // auto-hide panel
+};
+
 </script>
 
 </body>
